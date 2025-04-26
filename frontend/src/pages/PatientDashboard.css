@@ -1,0 +1,460 @@
+/* PatientDashboard.css */
+
+/* Main layout */
+.patient-dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: 250px; /* Match the sidebar width */
+}
+
+.dashboard-body {
+    padding: 25px;
+    overflow-y: auto;
+    margin-top: 60px; /* Match the topbar height */
+}
+
+/* Dark theme styling */
+.dashboard-body.dark {
+    background: linear-gradient(180deg, #0f172a 0%, #000000 50%, #1e293b 100%);
+    color: #e2e8f0;
+}
+
+/* Welcome section */
+.welcome-section {
+    margin-bottom: 30px;
+    padding-left: 10px;
+    border-left: 5px solid #0ea5e9;
+}
+
+.welcome-section h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #f8fafc;
+}
+
+.welcome-subtitle {
+    color: #94a3b8;
+    font-size: 16px;
+}
+
+/* Loading state */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 20px;
+    color: #0ea5e9;
+    background-color: #0f172a;
+}
+
+/* Summary cards */
+.summary-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.summary-card {
+    display: flex;
+    align-items: center;
+    padding: 25px;
+    border-radius: 12px;
+    background-color: #1e293b;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+.summary-icon {
+    font-size: 36px;
+    margin-right: 25px;
+    color: #0ea5e9;
+}
+
+.summary-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.summary-value {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 1.2;
+    color: #f8fafc;
+}
+
+.summary-value.secondary {
+    color: #0ea5e9;
+    font-size: 24px;
+}
+
+.summary-label {
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-top: 8px;
+    letter-spacing: 1px;
+    color: #94a3b8;
+}
+
+/* Controls */
+.controls-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+    min-width: 250px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 45px 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    background-color: #1e293b;
+    color: #f8fafc;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #0ea5e9;
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3);
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+}
+
+.controls-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.control-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background: linear-gradient(to right, #0ea5e9, #14b8a6);
+    color: white;
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4);
+}
+
+/* Prescriptions Table */
+.prescriptions-table-container {
+    background-color: #1e293b;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 35px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.section-title {
+    font-size: 22px;
+    margin-bottom: 25px;
+    color: #f8fafc;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #334155;
+}
+
+.prescriptions-table {
+    overflow-x: auto;
+}
+
+.prescriptions-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.prescriptions-table th, 
+.prescriptions-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #334155;
+}
+
+.prescriptions-table th {
+    color: #94a3b8;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.prescriptions-table tbody tr {
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.prescriptions-table tbody tr:hover {
+    background-color: #334155;
+}
+
+.view-btn {
+    padding: 8px 16px;
+    background: linear-gradient(to right, #0ea5e9, #14b8a6);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.view-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(14, 165, 233, 0.4);
+}
+
+/* Empty state */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.empty-icon {
+    font-size: 64px;
+    color: #475569;
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    font-size: 24px;
+    color: #f8fafc;
+    margin-bottom: 15px;
+}
+
+.empty-state p {
+    color: #94a3b8;
+    font-size: 16px;
+    max-width: 400px;
+}
+
+/* Chart */
+.chart-container {
+    background-color: #1e293b;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 35px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.chart-wrapper {
+    height: 350px;
+    margin-top: 20px;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 30px;
+}
+
+.pagination button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #334155;
+    border: none;
+    border-radius: 8px;
+    color: #f8fafc;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.pagination button:hover {
+    background-color: #475569;
+}
+
+.pagination button.active {
+    background: linear-gradient(to right, #0ea5e9, #14b8a6);
+    color: white;
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #1e293b;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.modal-header {
+    padding: 20px 25px;
+    background: linear-gradient(to right, #0f172a, #334155);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    color: #f8fafc;
+    margin: 0;
+    font-size: 22px;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: #f8fafc;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #0ea5e9;
+}
+
+.modal-body {
+    padding: 25px;
+}
+
+.detail-row {
+    display: flex;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.detail-label {
+    width: 120px;
+    font-weight: 600;
+    color: #94a3b8;
+}
+
+.detail-value {
+    flex: 1;
+    color: #f8fafc;
+}
+
+.detail-value.note {
+    margin-top: 10px;
+    width: 100%;
+    padding: 15px;
+    background-color: #334155;
+    border-radius: 8px;
+    white-space: pre-wrap;
+}
+
+.modal-footer {
+    padding: 20px 25px;
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid #334155;
+}
+
+.modal-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(to right, #0ea5e9, #14b8a6);
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4);
+}
+
+/* Toast notification */
+.toast-notification {
+    position: fixed;
+    top: 80px;
+    right: 25px;
+    background-color: #1e293b;
+    border-left: 4px solid #0ea5e9;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1001;
+    min-width: 300px;
+    animation: slideIn 0.3s forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+}
+
+.toast-icon {
+    margin-right: 15px;
+    font-size: 20px;
+}
+
+.toast-message {
+    color: #f8fafc;
+}
+

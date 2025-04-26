@@ -1,0 +1,103 @@
+/* Signup Form Styles */
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #1a1a1a;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.signup-form {
+    background: rgba(40, 40, 40, 0.8);
+    border-radius: 10px;
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* New styles for text color */
+.signup-form h2 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.signup-form label,
+.signup-form p {
+    color: white; /* Change text color to white */
+}
+
+/* Input fields and select dropdown */
+.signup-form input,
+.signup-form select {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    box-sizing: border-box;
+}
+
+/* Wrapper for the select element */
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Custom select styling */
+.signup-form select {
+    background: rgba(255, 255, 255, 0.1);
+    color: #000000;
+    border-radius: 5px;
+    padding: 12px;
+    cursor: pointer;
+    -webkit-appearance: none;  /* Removes default styling for webkit-based browsers */
+    -moz-appearance: none;     /* Removes default styling for Firefox */
+    appearance: none;          /* General cross-browser compatibility */
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M6 9l6 6 6-6" /%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+}
+
+/* Button Styles */
+.signup-form button {
+    background: #6200ea;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+/* Button hover effect */
+.signup-form button:hover {
+    background: #3700b3;
+}
+
+/* Input focus style */
+.signup-form input:focus,
+.signup-form select:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Media query for responsiveness */
+@media (max-width: 600px) {
+    .signup-form {
+        max-width: 90%;
+    }
+}

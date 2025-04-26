@@ -1,0 +1,86 @@
+/* Existing styles */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #1a1a1a;
+    padding: 0 20px; /* Adjusted padding for better spacing */
+    box-sizing: border-box;
+}
+
+.login-form {
+    background: rgba(40, 40, 40, 0.8);
+    border-radius: 10px;
+    padding: 30px; /* Increased padding for better spacing */
+    width: 100%;
+    max-width: 400px; /* Increased max-width for a more spacious form */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Ensures better stacking of elements */
+    justify-content: center;
+    align-items: center;
+}
+
+/* New styles for text color */
+.login-form label, 
+.login-form p {
+    color: white; /* Change text color to white */
+}
+
+/* Updated heading style to ensure color is white and centered */
+.login-form h1 {
+    color: white !important; /* Set the heading color to white */
+    margin-bottom: 20px; /* Added margin below the heading */
+    font-size: 2rem; /* Adjusted font size for heading */
+    font-weight: 600; /* Make the heading bold */
+}
+
+/* Override styles for dark mode */
+.dark .login-form h1 {
+    color: white !important; /* Ensure it remains white in dark mode */
+}
+
+/* Input field styles */
+input {
+    width: 100%;
+    padding: 12px; /* Increased padding for better input field size */
+    margin: 12px 0; /* Adjusted margin for better spacing */
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    box-sizing: border-box;
+}
+
+/* Button styles */
+button {
+    background: #6200ea;
+    color: white;
+    border: none;
+    padding: 12px; /* Increased padding for button */
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px; /* Added top margin for spacing between input and button */
+    font-size: 16px; /* Adjusted font size for button */
+}
+
+/* Additional hover effects */
+button:hover {
+    background: #3700b3; /* Darker shade on hover */
+}
+
+input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.2); /* Slightly brighter background on focus */
+}
+
+/* Optional: Add a media query for responsiveness */
+@media (max-width: 600px) {
+    .login-form {
+        max-width: 90%;
+    }
+}

@@ -1,0 +1,201 @@
+/* sidebar.css */
+.sidebar {
+    background: linear-gradient(180deg, #4960F9 0%, #1E3A8A 100%);
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    color: #fff;
+    transition: all 0.3s ease;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar.closed {
+    width: 60px;
+}
+
+.toggle-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    cursor: pointer;
+    z-index: 10;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    padding: 25px 20px;
+    margin-bottom: 15px;
+}
+
+.rx-logo {
+    height: 40px;
+    width: auto;
+    margin-right: 15px;
+    transition: all 0.3s ease;
+}
+
+.sidebar.closed .rx-logo {
+    margin: 0 auto;
+}
+
+.sidebar-title {
+    font-size: 22px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    letter-spacing: 1px;
+}
+
+.sidebar.closed .sidebar-title {
+    display: none;
+}
+
+.search-container {
+    padding: 0 15px 20px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.sidebar.closed .search-container {
+    display: none;
+}
+
+.sidebar-menu {
+    padding: 10px 0;
+}
+
+.sidebar-button {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    border-left: 4px solid transparent;
+}
+
+.sidebar-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left: 4px solid rgba(255, 255, 255, 0.5);
+}
+
+.sidebar-button.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-left: 4px solid #fff;
+}
+
+.sidebar-button .icon {
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+.sidebar-button .text {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.sidebar.closed .sidebar-button .text {
+    display: none;
+}
+
+.sidebar.closed .sidebar-button {
+    justify-content: center;
+    padding: 18px 0;
+}
+
+.sidebar.closed .sidebar-button .icon {
+    margin-right: 0;
+    font-size: 20px;
+}
+
+/* Tooltip for closed sidebar */
+.sidebar.closed .sidebar-button {
+    position: relative;
+}
+
+.sidebar.closed .sidebar-button:hover::after {
+    content: attr(data-title);
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 1001;
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 60px;
+    }
+    
+    .sidebar-title {
+        display: none;
+    }
+    
+    .search-container {
+        display: none;
+    }
+    
+    .sidebar-button {
+        justify-content: center;
+        padding: 18px 0;
+    }
+    
+    .sidebar-button .text {
+        display: none;
+    }
+    
+    .sidebar-button .icon {
+        margin-right: 0;
+        font-size: 20px;
+    }
+    
+    .rx-logo {
+        margin: 0 auto;
+    }
+}
