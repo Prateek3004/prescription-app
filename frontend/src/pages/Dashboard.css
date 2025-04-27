@@ -285,6 +285,7 @@
 .form-group {
     display: flex;
     flex-direction: column;
+    margin-bottom: 15px;
 }
 
 .form-group label {
@@ -300,7 +301,16 @@
     border: 1px solid #ddd;
     border-radius: 6px;
     font-size: 15px;
-    transition: border-color 0.3s ease;
+    color: #333;
+    background-color: #fff;
+    width: 100%;
+    height: 45px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input::placeholder,
+.form-group select::placeholder {
+    color: #aaa;
 }
 
 .form-group input:focus,
@@ -308,6 +318,13 @@
     border-color: #5170E1;
     outline: none;
     box-shadow: 0 0 0 2px rgba(81, 112, 225, 0.2);
+}
+
+/* Make sure select options are visible */
+.form-group select option {
+    color: #333;
+    background-color: #fff;
+    padding: 8px;
 }
 
 .form-actions {
@@ -425,4 +442,61 @@
     .stat-label {
         font-size: 14px;
     }
+}
+
+/* Dark mode styling */
+body.dark-mode {
+    background-color: #222;
+    color: #f5f5f5;
+}
+
+body.dark-mode .dashboard-body {
+    background-color: #333;
+}
+
+body.dark-mode .dashboard-title {
+    color: #f5f5f5;
+}
+
+body.dark-mode .chart-card,
+body.dark-mode .prescription-card,
+body.dark-mode .prescription-form-container {
+    background-color: #444;
+    color: #f5f5f5;
+}
+
+body.dark-mode .prescription-header {
+    background-color: #555;
+}
+
+body.dark-mode .prescription-header h3 {
+    color: #f5f5f5;
+}
+
+body.dark-mode .prescription-details p {
+    color: #ddd;
+}
+
+body.dark-mode .form-group label {
+    color: #ddd;
+}
+
+/* Improved form fields for dark mode */
+body.dark-mode .form-group input,
+body.dark-mode .form-group select {
+    background-color: #555;
+    color: #fff;
+    border-color: #666;
+}
+
+/* Make sure text is visible in dark mode for select options */
+body.dark-mode .form-group select option {
+    background-color: #555;
+    color: #fff;
+}
+
+/* Fix specifically for placeholder text in dark mode */
+body.dark-mode .form-group input::placeholder,
+body.dark-mode .form-group select::placeholder {
+    color: #ccc;
 }

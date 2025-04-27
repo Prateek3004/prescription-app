@@ -6,6 +6,7 @@ import axios from "axios";
 import { saveAs } from "file-saver";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { jsPDF } from "jspdf";
+import "jspdf-autotable";
 import "./PatientDashboard.css";
 
 const PatientDashboard = () => {
@@ -20,10 +21,34 @@ const PatientDashboard = () => {
     const [selectedPrescription, setSelectedPrescription] = useState(null);
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState("");
+    const [upcomingMedication, setUpcomingMedication] = useState([]);
+    const [healthTips, setHealthTips] = useState([]);
     const prescriptionsPerPage = 5;
 
+    // Dark mode state
+    const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
     // Check for new prescriptions to show notifications
     const [lastPrescriptionCount, setLastPrescriptionCount] = useState(0);
+
+    // Apply dark mode class when state changes
+    useEffect(() => {
+        const container = document.querySelector('.dashboard-container');
+        if (container) {
+            if (darkMode) {
+                container.classList.add('dark');
+            } else {
+                container.classList.remove('dark');
+            }
+        }
+
+        // Save preference to localStorage
+        localStorage.setItem('darkMode', darkMode);
+    }, [darkMode]);
+
+    // Toggle dark mode function
+    const toggleDarkMode = () => {
+        setDarkMode(!darkMode);
+    };
 
     // Fetch data on component mount
     useEffect(() => {
@@ -38,6 +63,12 @@ const PatientDashboard = () => {
 
                 setUser(userData);
                 const prescriptionsData = await fetchPatientPrescriptions(userData.email);
+
+                // Generate upcoming medication reminders
+                generateUpcomingMedication(prescriptionsData);
+
+                // Load health tips
+                loadHealthTips();
 
                 // Check for new prescriptions
                 const storedCount = parseInt(localStorage.getItem("prescriptionCount") || "0");
@@ -57,6 +88,48 @@ const PatientDashboard = () => {
 
         fetchInitialData();
     }, [navigate]);
+
+    // Load health tips
+    const loadHealthTips = () => {
+        const tips = [
+            "Take your medications as prescribed by your doctor.",
+            "Stay hydrated by drinking at least 8 glasses of water daily.",
+            "Aim for 7-8 hours of quality sleep each night.",
+            "Include fruits and vegetables in every meal.",
+            "Take short breaks from screen time to reduce eye strain.",
+            "Regular physical activity can help reduce stress and improve overall health.",
+            "Practice mindfulness or meditation for mental well-being."
+        ];
+
+        // Randomly select 3 tips
+        const selectedTips = [];
+        const usedIndices = new Set();
+
+        while (selectedTips.length < 3 && selectedTips.length < tips.length) {
+            const randomIndex = Math.floor(Math.random() * tips.length);
+            if (!usedIndices.has(randomIndex)) {
+                selectedTips.push(tips[randomIndex]);
+                usedIndices.add(randomIndex);
+            }
+        }
+
+        setHealthTips(selectedTips);
+    };
+
+    // Generate upcoming medication reminders
+    const generateUpcomingMedication = (prescriptionsData) => {
+        if (!prescriptionsData.length) return;
+
+        // Get recent medications (last 30 days)
+        const thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+        const recentMedications = prescriptionsData.filter(p =>
+            new Date(p.created_at) >= thirtyDaysAgo
+        ).slice(0, 3);
+
+        setUpcomingMedication(recentMedications);
+    };
 
     // Optimized data fetch function
     const fetchPatientPrescriptions = useCallback(async (email) => {
@@ -103,6 +176,20 @@ const PatientDashboard = () => {
 
     const totalPages = Math.ceil(filteredPrescriptions.length / prescriptionsPerPage);
 
+    // Format doctor name function
+    const formatDoctorName = (prescription) => {
+        if (prescription.doctor_name) return prescription.doctor_name;
+        if (prescription.doctor_email) {
+            const nameFromEmail = prescription.doctor_email.split('@')[0];
+            // Capitalize first letter of each word
+            return "Dr. " + nameFromEmail
+                .split('.')
+                .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+                .join(' ');
+        }
+        return "Unknown Doctor";
+    };
+
     // Prepare chart data for medicine usage over time
     const chartData = useMemo(() => {
         const medicationCount = {};
@@ -146,7 +233,7 @@ const PatientDashboard = () => {
 
     // Generate random colors for chart lines
     const getRandomColor = () => {
-        const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'];
+        const colors = ['#5170E1', '#4CAF50', '#F44336', '#FF9800', '#9C27B0', '#00BCD4'];
         return colors[Math.floor(Math.random() * colors.length)];
     };
 
@@ -180,7 +267,7 @@ const PatientDashboard = () => {
     const handleExportCSV = () => {
         const header = "Medicine,Dosage,Doctor,Date\n";
         const csvRows = prescriptions.map(p =>
-            `${p.medication},${p.dosage},${p.doctor_name || 'Unknown'},${p.date || new Date(p.created_at).toLocaleDateString()}`
+            `${p.medication},${p.dosage},${formatDoctorName(p)},${p.date || new Date(p.created_at).toLocaleDateString()}`
         ).join("\n");
 
         const blob = new Blob([header + csvRows], { type: "text/csv" });
@@ -206,7 +293,7 @@ const PatientDashboard = () => {
         const data = prescriptions.map(p => [
             p.medication,
             p.dosage,
-            p.doctor_name || "Unknown",
+            formatDoctorName(p),
             p.date || new Date(p.created_at).toLocaleDateString()
         ]);
 
@@ -216,7 +303,7 @@ const PatientDashboard = () => {
             head: headers,
             body: data,
             theme: 'striped',
-            headStyles: { fillColor: [15, 76, 129] }
+            headStyles: { fillColor: [81, 112, 225] }
         });
 
         doc.save("my_prescriptions.pdf");
@@ -227,12 +314,22 @@ const PatientDashboard = () => {
     }
 
     return (
-        <div className="patient-dashboard-container">
-            <Sidebar />
+        <div className={`dashboard-container ${darkMode ? 'dark' : ''}`}>
+            <Sidebar
+                onLogout={handleLogout}
+                userRole="Patient"
+                darkMode={darkMode}
+                toggleDarkMode={toggleDarkMode}
+            />
             <div className="main-content">
-                <Topbar user={user} onLogout={handleLogout} />
+                <Topbar
+                    user={user}
+                    onLogout={handleLogout}
+                    darkMode={darkMode}
+                    toggleDarkMode={toggleDarkMode}
+                />
 
-                <div className="dashboard-body dark">
+                <div className="dashboard-body">
                     {/* Toast Notification */}
                     {showToast && (
                         <div className="toast-notification">
@@ -244,64 +341,100 @@ const PatientDashboard = () => {
                         </div>
                     )}
 
-                    <div className="welcome-section">
-                        <h1>Welcome, {user.name || user.email}</h1>
+                    <div className="dashboard-title">
+                        Welcome, {user.name || user.email}
                         <p className="welcome-subtitle">Here's your health dashboard</p>
                     </div>
 
-                    {/* Prescription Summary Cards */}
-                    <div className="summary-container">
-                        <div className="summary-card">
-                            <div className="summary-icon">
+                    {/* Summary Cards */}
+                    <div className="stats-container">
+                        <div className="stat-card patients">
+                            <div className="stat-icon">
                                 <i className="fas fa-prescription-bottle"></i>
                             </div>
-                            <div className="summary-info">
-                                <span className="summary-value">{prescriptions.length}</span>
-                                <span className="summary-label">TOTAL PRESCRIPTIONS</span>
+                            <div className="stat-info">
+                                <span className="stat-value">{prescriptions.length}</span>
+                                <span className="stat-label">TOTAL PRESCRIPTIONS</span>
                             </div>
                         </div>
 
-                        <div className="summary-card">
-                            <div className="summary-icon">
+                        <div className="stat-card doctors">
+                            <div className="stat-icon">
                                 <i className="fas fa-calendar-alt"></i>
                             </div>
-                            <div className="summary-info">
-                                <span className="summary-value secondary">{lastPrescriptionDate}</span>
-                                <span className="summary-label">LAST PRESCRIPTION</span>
+                            <div className="stat-info">
+                                <span className="stat-value">{lastPrescriptionDate}</span>
+                                <span className="stat-label">LAST PRESCRIPTION</span>
                             </div>
                         </div>
                     </div>
 
-                    {/* Prescription Search and Controls */}
-                    <div className="controls-container">
-                        <div className="search-box">
-                            <input
-                                type="text"
-                                placeholder="Search by medicine or doctor..."
-                                value={searchTerm}
-                                onChange={handleSearch}
-                                className="search-input"
-                            />
-                            <i className="search-icon fas fa-search"></i>
-                        </div>
+                    {/* Medication Reminders */}
+                    <div className="chart-card">
+                        <h3>Upcoming Medication Reminders</h3>
+                        {upcomingMedication.length > 0 ? (
+                            <div className="reminders-container">
+                                {upcomingMedication.map((med, index) => (
+                                    <div className="reminder-item" key={index}>
+                                        <div className="reminder-icon">
+                                            <i className="fas fa-pills"></i>
+                                        </div>
+                                        <div className="reminder-details">
+                                            <h4>{med.medication}</h4>
+                                            <p>{med.dosage}</p>
+                                            <p>Prescribed by: {formatDoctorName(med)}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="no-data">No recent medications to remind you of</div>
+                        )}
+                    </div>
 
-                        <div className="controls-buttons">
-                            <button className="control-btn sort" onClick={handleSortToggle}>
-                                Sort: {sortOrder === "asc" ? "Oldest First" : "Newest First"}
+                    {/* Health Tips Section */}
+                    <div className="chart-card">
+                        <h3>Health Tips For You</h3>
+                        <div className="health-tips-container">
+                            {healthTips.map((tip, index) => (
+                                <div className="health-tip" key={index}>
+                                    <div className="tip-icon">💡</div>
+                                    <p>{tip}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Search and Controls */}
+                    <div className="section-header">
+                        <h2 className="section-title">My Prescriptions</h2>
+                        <div className="section-actions">
+                            <button className="sort-btn" onClick={handleSortToggle}>
+                                <i className={`fas fa-sort-${sortOrder === "asc" ? "up" : "down"}`}></i>
+                                {sortOrder === "asc" ? " Oldest First" : " Newest First"}
                             </button>
-                            <button className="control-btn export" onClick={handleExportCSV}>
-                                Export CSV
+                            <button className="export-btn" onClick={handleExportCSV}>
+                                <i className="fas fa-file-csv"></i> CSV
                             </button>
-                            <button className="control-btn export" onClick={handleExportPDF}>
-                                Download PDF
+                            <button className="export-btn" onClick={handleExportPDF}>
+                                <i className="fas fa-file-pdf"></i> PDF
                             </button>
                         </div>
+                    </div>
+
+                    <div className="search-box" style={{ marginBottom: '20px' }}>
+                        <input
+                            type="text"
+                            placeholder="Search by medicine or doctor..."
+                            value={searchTerm}
+                            onChange={handleSearch}
+                            className="search-input"
+                        />
+                        <i className="search-icon fas fa-search"></i>
                     </div>
 
                     {/* Prescriptions Table */}
-                    <div className="prescriptions-table-container">
-                        <h2 className="section-title">My Prescriptions</h2>
-
+                    <div className="chart-card">
                         {prescriptions.length > 0 ? (
                             <>
                                 <div className="prescriptions-table">
@@ -320,10 +453,10 @@ const PatientDashboard = () => {
                                                 <tr key={p.id} onClick={() => handleViewPrescription(p)}>
                                                     <td>{p.medication}</td>
                                                     <td>{p.dosage}</td>
-                                                    <td>{p.doctor_name || "Dr. " + p.doctor_email?.split('@')[0] || "Unknown"}</td>
+                                                    <td>{formatDoctorName(p)}</td>
                                                     <td>{p.date || new Date(p.created_at).toLocaleDateString()}</td>
                                                     <td>
-                                                        <button className="view-btn" onClick={(e) => {
+                                                        <button className="edit-btn" onClick={(e) => {
                                                             e.stopPropagation();
                                                             handleViewPrescription(p);
                                                         }}>
@@ -352,7 +485,7 @@ const PatientDashboard = () => {
                                 )}
                             </>
                         ) : (
-                            <div className="empty-state">
+                            <div className="no-data">
                                 <div className="empty-icon">
                                     <i className="fas fa-prescription-bottle-alt"></i>
                                 </div>
@@ -364,21 +497,15 @@ const PatientDashboard = () => {
 
                     {/* Prescription History Chart */}
                     {prescriptions.length > 0 && (
-                        <div className="chart-container">
-                            <h2 className="section-title">Prescription History</h2>
+                        <div className="chart-card">
+                            <h3>Prescription History</h3>
                             <div className="chart-wrapper">
                                 <ResponsiveContainer width="100%" height={300}>
                                     <LineChart data={chartData}>
-                                        <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-                                        <XAxis dataKey="name" stroke="#999" />
-                                        <YAxis stroke="#999" />
-                                        <Tooltip
-                                            contentStyle={{
-                                                backgroundColor: '#333',
-                                                border: '1px solid #555',
-                                                color: '#eee'
-                                            }}
-                                        />
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <XAxis dataKey="name" />
+                                        <YAxis />
+                                        <Tooltip />
                                         <Legend />
                                         {medications.map((med, index) => (
                                             <Line
@@ -421,9 +548,7 @@ const PatientDashboard = () => {
                             <div className="detail-row">
                                 <span className="detail-label">Doctor:</span>
                                 <span className="detail-value">
-                                    {selectedPrescription.doctor_name ||
-                                        "Dr. " + selectedPrescription.doctor_email?.split('@')[0] ||
-                                        "Unknown"}
+                                    {formatDoctorName(selectedPrescription)}
                                 </span>
                             </div>
 
@@ -444,7 +569,7 @@ const PatientDashboard = () => {
                         </div>
 
                         <div className="modal-footer">
-                            <button className="modal-btn" onClick={() => setShowModal(false)}>Close</button>
+                            <button className="submit-btn" onClick={() => setShowModal(false)}>Close</button>
                         </div>
                     </div>
                 </div>

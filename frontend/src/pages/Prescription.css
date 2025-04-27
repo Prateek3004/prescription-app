@@ -1,4 +1,4 @@
-/* prescription.css */
+/* prescription.css - Updated to match dashboard styling */
 
 /* Global Styles */
 * {
@@ -10,81 +10,86 @@
 body {
   font-family: 'Poppins', 'Inter', sans-serif;
   color: #333;
-  background-attachment: fixed;
+  background-color: #f5f5f5;
 }
 
 .prescription-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background-color: #f5f5f5;
   overflow-x: hidden;
 }
 
 /* Header Styles */
 .header {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: white;
+  border-bottom: 1px solid #eee;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .page-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: white;
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
   letter-spacing: -0.02em;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Navigation Buttons */
 .nav-buttons {
   display: flex;
-  gap: 10px;
+  gap: 15px;
 }
 
 .nav-button {
-  padding: 8px 16px;
+  padding: 10px 16px;
   border-radius: 8px;
   font-weight: 500;
   transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.15);
-  color: white;
+  border: 1px solid #eee;
+  background-color: white;
+  color: #333;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .nav-button:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background-color: #f5f5f5;
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .nav-button.active {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.5);
+  background-color: #5170E1;
+  border-color: #5170E1;
+  color: white;
 }
 
 /* Content Panel */
 .content-panel {
   background: white;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: all 0.3s ease;
+  margin-top: 25px;
 }
 
 .content-panel:hover {
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .panel-header {
-  padding: 20px 24px;
+  padding: 20px 25px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   display: flex;
   justify-content: space-between;
@@ -92,7 +97,7 @@ body {
 }
 
 .panel-title {
-  font-size: 1.5rem;
+  font-size: 18px;
   font-weight: 600;
   color: #333;
   display: flex;
@@ -101,10 +106,10 @@ body {
 }
 
 .panel-icon {
-  background: rgba(107, 70, 193, 0.1);
-  color: #6b46c1;
+  background: rgba(81, 112, 225, 0.1);
+  color: #5170E1;
   border-radius: 8px;
-  padding: 6px;
+  padding: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,40 +117,42 @@ body {
 
 /* Form Styles */
 .form-container {
-  background: #f9f7ff;
-  border-radius: 12px;
-  border: 1px solid rgba(107, 70, 193, 0.2);
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #eee;
   overflow: hidden;
   transition: all 0.3s ease;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .form-container:hover {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 .form-header {
-  padding: 16px 24px;
-  border-bottom: 1px solid rgba(107, 70, 193, 0.1);
+  padding: 16px 25px;
+  border-bottom: 1px solid #eee;
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(107, 70, 193, 0.05);
+  background: #f9f9f9;
 }
 
 .form-title {
-  font-size: 1.25rem;
+  font-size: 18px;
   font-weight: 600;
-  color: #6b46c1;
+  color: #333;
 }
 
 .form-body {
-  padding: 20px 24px;
+  padding: 25px;
 }
 
 .form-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 25px;
 }
 
 @media (max-width: 768px) {
@@ -157,12 +164,12 @@ body {
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .form-label {
-  font-size: 0.875rem;
-  color: #666;
+  font-size: 16px;
+  color: #555;
   font-weight: 500;
 }
 
@@ -170,18 +177,19 @@ body {
   width: 100%;
   padding: 12px 16px;
   background: white;
-  border: 1px solid rgba(107, 70, 193, 0.3);
-  border-radius: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
   color: #333;
-  font-size: 1rem;
+  font-size: 15px;
   transition: all 0.2s ease;
   font-family: inherit;
+  height: 45px;
 }
 
 .form-input:focus {
-  border-color: #6b46c1;
+  border-color: #5170E1;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(107, 70, 193, 0.15);
+  box-shadow: 0 0 0 3px rgba(81, 112, 225, 0.15);
 }
 
 .form-input::placeholder {
@@ -191,9 +199,9 @@ body {
 .form-footer {
   display: flex;
   justify-content: flex-end;
-  padding: 16px 24px;
-  border-top: 1px solid rgba(107, 70, 193, 0.1);
-  background: rgba(107, 70, 193, 0.05);
+  padding: 16px 25px;
+  border-top: 1px solid #eee;
+  background: #f9f9f9;
 }
 
 /* Button Styles */
@@ -202,10 +210,10 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 1rem;
+  padding: 12px 25px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
   border: none;
@@ -215,15 +223,15 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #6b46c1, #8b5cf6);
+  background-color: #4caf50;
   color: white;
-  box-shadow: 0 4px 15px rgba(107, 70, 193, 0.3);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.25);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #5a3ca9, #7c4dfa);
+  background-color: #3d8b40;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(107, 70, 193, 0.4);
+  box-shadow: 0 6px 12px rgba(76, 175, 80, 0.3);
 }
 
 .btn-primary:active {
@@ -234,84 +242,61 @@ body {
 .prescription-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .prescription-card {
   background: white;
-  border-radius: 12px;
-  overflow: visible; /* Changed from hidden to visible to ensure content isn't cut off */
+  border-radius: 10px;
+  overflow: hidden;
   transition: all 0.3s ease;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  position: relative; /* Added to establish positioning context */
+  border: 1px solid #eee;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  position: relative;
 }
 
 .prescription-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 .card-header {
-  padding: 16px 20px;
+  padding: 18px 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
   position: relative;
-  background: linear-gradient(to right, #f9f7ff, white);
-  z-index: 1; /* Ensure header stays above content */
-}
-
-.card-header::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(107, 70, 193, 0.1), transparent);
+  background: white;
+  z-index: 1;
+  border-bottom: 1px solid #eee;
 }
 
 .medication-name {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #6b46c1;
+  font-size: 18px;
+  font-weight: 600;
+  color: #5170E1;
 }
 
 .medication-subtitle {
-  font-size: 0.875rem;
+  font-size: 14px;
   color: #666;
   margin-top: 4px;
 }
 
 .card-content {
-  background: #f9f7ff;
-  padding: 16px 20px;
-  /* Removed animation to ensure content is always visible when expanded */
-  opacity: 1; /* Ensure content is fully visible */
-  min-height: 100px; /* Minimum height to ensure content is visible */
-  position: relative; /* Position context for child elements */
-  z-index: 0; /* Below header but still visible */
-}
-
-/* Replaced slideDown animation with a simpler version */
-@keyframes slideDown {
-  from {
-    max-height: 0;
-    opacity: 0;
-  }
-  to {
-    max-height: 500px; /* Large enough to contain content */
-    opacity: 1;
-  }
+  background: #f9f9f9;
+  padding: 20px 25px;
+  opacity: 1;
+  position: relative;
+  z-index: 0;
 }
 
 .detail-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  width: 100%; /* Ensure grid takes full width */
+  gap: 20px;
+  width: 100%;
 }
 
 @media (max-width: 640px) {
@@ -323,45 +308,45 @@ body {
 .detail-item {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  min-height: 60px; /* Minimum height to ensure content is visible */
+  gap: 8px;
 }
 
 .detail-label {
-  font-size: 0.875rem;
+  font-size: 14px;
   color: #666;
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .detail-value {
-  font-size: 1rem;
+  font-size: 16px;
   color: #333;
   font-weight: 400;
-  word-break: break-word; /* Prevent overflow of long values */
+  word-break: break-word;
 }
 
 /* Notification */
 .notification {
-  padding: 16px;
+  padding: 16px 25px;
   border-radius: 8px;
   position: relative;
   overflow: hidden;
   animation: slideInTop 0.3s ease forwards;
+  margin-bottom: 20px;
 }
 
 .notification.success {
-  background: rgba(34, 197, 94, 0.1);
-  border: 1px solid rgba(34, 197, 94, 0.3);
-  color: #16a34a;
+  background: rgba(76, 175, 80, 0.1);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+  color: #3d8b40;
 }
 
 .notification.error {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  color: #dc2626;
+  background: rgba(244, 67, 54, 0.1);
+  border: 1px solid rgba(244, 67, 54, 0.3);
+  color: #d32f2f;
 }
 
 @keyframes slideInTop {
@@ -380,8 +365,8 @@ body {
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  border: 3px solid rgba(107, 70, 193, 0.1);
-  border-top-color: #6b46c1;
+  border: 3px solid rgba(81, 112, 225, 0.1);
+  border-top-color: #5170E1;
   animation: spin 1s infinite linear;
 }
 
@@ -404,20 +389,20 @@ body {
 /* Empty State */
 .empty-state {
   text-align: center;
-  padding: 48px 24px;
-  background: #f9f7ff;
-  border-radius: 12px;
-  border: 1px dashed rgba(107, 70, 193, 0.2);
+  padding: 48px 25px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  border: 1px dashed #ddd;
 }
 
 .empty-text {
-  font-size: 1.25rem;
+  font-size: 18px;
   color: #666;
   margin-bottom: 8px;
 }
 
 .empty-subtext {
-  font-size: 1rem;
+  font-size: 16px;
   color: #888;
 }
 
@@ -432,18 +417,18 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(107, 70, 193, 0.2);
+  background: rgba(81, 112, 225, 0.2);
   border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(107, 70, 193, 0.3);
+  background: rgba(81, 112, 225, 0.3);
 }
 
 /* Chevron Animation */
 .chevron {
   transition: transform 0.3s ease;
-  color: #6b46c1;
+  color: #5170E1;
 }
 
 .chevron.expanded {
@@ -469,13 +454,13 @@ body {
 /* Media Queries */
 @media (max-width: 992px) {
   .page-title {
-    font-size: 2rem;
+    font-size: 24px;
   }
 }
 
 @media (max-width: 768px) {
   .page-title {
-    font-size: 1.75rem;
+    font-size: 20px;
   }
   
   .nav-buttons {
@@ -501,13 +486,6 @@ body {
 
 .fade-in {
   animation: fadeIn 0.5s ease forwards;
-}
-
-/* Force visible for debug purposes */
-.force-visible {
-  display: block !important;
-  opacity: 1 !important;
-  visibility: visible !important;
 }
 
 /* Print styles - for prescription printing */
@@ -546,95 +524,125 @@ body {
 
 /* Dark mode styles */
 .dark-mode {
-  background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 100%);
+  background-color: #222;
+}
+
+.dark-mode .prescription-container {
+  background-color: #333;
+}
+
+.dark-mode .header {
+  background-color: #333;
+  border-color: #444;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .page-title {
+  color: #f5f5f5;
+}
+
+.dark-mode .nav-button {
+  background-color: #444;
+  color: #f5f5f5;
+  border-color: #555;
+}
+
+.dark-mode .nav-button:hover {
+  background-color: #555;
+}
+
+.dark-mode .nav-button.active {
+  background-color: #5170E1;
+  border-color: #5170E1;
 }
 
 .dark-mode .content-panel {
-  background: #1f2937;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  background-color: #444;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
 }
 
 .dark-mode .panel-title {
-  color: #e5e7eb;
+  color: #f5f5f5;
 }
 
 .dark-mode .panel-icon {
-  background: rgba(139, 92, 246, 0.2);
-  color: #a78bfa;
+  background: rgba(81, 112, 225, 0.2);
+  color: #8aa2f2;
 }
 
 .dark-mode .form-container {
-  background: #111827;
-  border-color: rgba(139, 92, 246, 0.3);
+  background-color: #444;
+  border-color: #555;
 }
 
 .dark-mode .form-header {
-  background: rgba(139, 92, 246, 0.1);
-  border-color: rgba(139, 92, 246, 0.2);
+  background-color: #333;
+  border-color: #555;
 }
 
 .dark-mode .form-title {
-  color: #a78bfa;
+  color: #f5f5f5;
 }
 
 .dark-mode .form-label {
-  color: #9ca3af;
+  color: #ccc;
 }
 
 .dark-mode .form-input {
-  background: #1f2937;
-  border-color: rgba(139, 92, 246, 0.3);
-  color: #e5e7eb;
+  background-color: #555;
+  border-color: #666;
+  color: #f5f5f5;
 }
 
-.dark-mode .form-input:focus {
-  border-color: #a78bfa;
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+.dark-mode .form-input::placeholder {
+  color: #999;
 }
 
 .dark-mode .form-footer {
-  background: rgba(139, 92, 246, 0.1);
-  border-color: rgba(139, 92, 246, 0.2);
+  background-color: #333;
+  border-color: #555;
 }
 
 .dark-mode .prescription-card {
-  background: #1f2937;
-  border-color: rgba(0, 0, 0, 0.2);
+  background-color: #444;
+  border-color: #555;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .dark-mode .card-header {
-  background: linear-gradient(to right, #111827, #1f2937);
+  background-color: #444;
+  border-color: #555;
 }
 
 .dark-mode .medication-name {
-  color: #a78bfa;
+  color: #8aa2f2;
 }
 
 .dark-mode .medication-subtitle {
-  color: #9ca3af;
+  color: #ccc;
 }
 
 .dark-mode .card-content {
-  background: #111827;
+  background-color: #333;
 }
 
 .dark-mode .detail-label {
-  color: #9ca3af;
+  color: #ccc;
 }
 
 .dark-mode .detail-value {
-  color: #e5e7eb;
+  color: #f5f5f5;
 }
 
 .dark-mode .empty-state {
-  background: #111827;
-  border-color: rgba(139, 92, 246, 0.2);
+  background-color: #333;
+  border-color: #555;
 }
 
 .dark-mode .empty-text {
-  color: #e5e7eb;
+  color: #f5f5f5;
 }
 
 .dark-mode .empty-subtext {
-  color: #9ca3af;
+  color: #ccc;
 }

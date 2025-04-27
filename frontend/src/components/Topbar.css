@@ -3,21 +3,21 @@
     background-color: #5170E1;
     height: 60px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0 25px;
+    justify-content: space-between;
+    padding: 0 20px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     color: white;
     position: fixed;
     top: 0;
-    right: 0;
     left: 250px;
+    right: 0;
     z-index: 999;
     transition: all 0.3s ease;
 }
 
-/* Adjust when sidebar is collapsed */
-.sidebar.closed + .main-content .topbar {
+/* When sidebar is collapsed */
+.topbar.collapsed {
     left: 60px;
 }
 
@@ -25,26 +25,19 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 20px;
-    transition: background-color 0.3s ease;
-}
-
-.user-profile:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    gap: 10px;
 }
 
 .user-avatar {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background-color: #fff;
     overflow: hidden;
-    margin-right: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border: 2px solid white;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .user-avatar img {
@@ -54,12 +47,14 @@
 }
 
 .user-name {
+    font-size: 16px;
     font-weight: 500;
-    margin-right: 8px;
-    font-size: 15px;
+    color: white;
+    white-space: nowrap;
 }
 
 .dropdown-icon {
+    color: white;
     transition: transform 0.3s ease;
 }
 
@@ -67,12 +62,11 @@
     transform: rotate(180deg);
 }
 
-/* Theme toggle button styling */
 .theme-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
     width: 40px;
@@ -82,20 +76,21 @@
 }
 
 .theme-toggle:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.3);
     transform: rotate(20deg);
 }
 
 .theme-toggle svg {
-    color: white;
     width: 20px;
     height: 20px;
+    color: white;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .topbar {
         padding: 0 15px;
+        left: 0;
     }
 
     .user-name {

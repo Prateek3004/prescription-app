@@ -27,6 +27,7 @@ const Dashboard = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [showPrescriptions, setShowPrescriptions] = useState(false);
     const [showLastSevenDays, setShowLastSevenDays] = useState(true);
+    const [isDarkMode, setIsDarkMode] = useState(false);
     const prescriptionsPerPage = 5;
 
     const [stats, setStats] = useState({
@@ -40,6 +41,12 @@ const Dashboard = () => {
             patients: { male: 0, female: 0 }
         }
     });
+
+    // Toggle dark mode function
+    const toggleTheme = () => {
+        setIsDarkMode(!isDarkMode);
+        document.body.classList.toggle('dark-mode');
+    };
 
     // Colors for charts
     const COLORS = ["#4287f5", "#f54242"];
@@ -271,10 +278,10 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="dashboard-container">
+        <div className={`dashboard-container ${isDarkMode ? 'dark-mode' : ''}`}>
             <Sidebar />
             <div className="main-content">
-                <Topbar user={user} onLogout={handleLogout} />
+                <Topbar user={user} onLogout={handleLogout} isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
 
                 <div className="dashboard-body">
                     <h1 className="dashboard-title">Dashboard</h1>
@@ -407,18 +414,15 @@ const Dashboard = () => {
                             <h2>{editMode ? "Edit Prescription" : "Add New Prescription"}</h2>
                             <form onSubmit={handleAddOrEdit} className="prescription-form">
                                 <div className="form-group">
-                                    <label>Patient:</label>
-                                    <select
+                                    <label>Patient Email:</label>
+                                    <input
+                                        type="email"
                                         name="patient_email"
                                         value={formData.patient_email}
                                         onChange={handleChange}
+                                        placeholder="Enter patient email"
                                         required
-                                    >
-                                        <option value="">Select Patient</option>
-                                        {patients.map((patient, idx) => (
-                                            <option key={idx} value={patient.email}>{patient.email}</option>
-                                        ))}
-                                    </select>
+                                    />
                                 </div>
 
                                 <div className="form-group">

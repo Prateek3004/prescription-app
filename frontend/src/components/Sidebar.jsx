@@ -36,13 +36,7 @@ const Sidebar = () => {
                     navigate={navigate}
                     isActive={isActive(dashboardPath)}
                 />
-                <SidebarButton
-                    icon={<FiUser size={20} />}
-                    text="Profile"
-                    path="/profile"
-                    navigate={navigate}
-                    isActive={isActive("/profile")}
-                />
+
                 <SidebarButton
                     icon={<FiFileText size={20} />}
                     text="Prescription"
@@ -50,13 +44,7 @@ const Sidebar = () => {
                     navigate={navigate}
                     isActive={isActive("/prescription")}
                 />
-                <SidebarButton
-                    icon={<FiBarChart2 size={20} />}
-                    text="Reports"
-                    path="/reports"
-                    navigate={navigate}
-                    isActive={isActive("/reports")}
-                />
+
             </div>
         </div>
     );
